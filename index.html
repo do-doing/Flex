@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>秒懂flex布局</title>
+  <style>
+    body {
+      font-family: '微软雅黑';
+    }
+
+    .gfather {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    h2{
+      font-size: 20px;
+    }
+    .gfather section {
+      position: relative;
+      z-index: 1;
+      padding: 0 20px;
+      margin-bottom: 15px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      border: 1px solid #e4ecf3;
+      background-color: #fff;
+
+      -webkit-transition: all .2s ease;
+      -moz-transition: all .2s ease;
+      -o-transition: all .2s ease;
+      transition: all .2s ease;
+    }
+
+    .gfather section:hover {
+      transform: translateY(-6px);
+      -webkit-transform: translateY(-6px);
+      -moz-transform: translateY(-6px);
+      box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+      -webkit-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+      -moz-box-shadow: 0 26px 40px -24px rgba(0, 36, 100, .3);
+    }
+    
+    .parent {
+      display: flex;
+      border: 2px solid #3bc9db;
+      border-radius: 5px;
+      background-color: #e3fafc;
+      flex-direction: row;
+      max-height: 500px;
+      height: 200px;
+    }
+
+    .child {
+      color: #fff;
+      width: 100px;
+      background-color: #1098ad;
+      border: 1px solid #217f8e;
+      border-radius: 2px;
+      margin: 5px;
+      flex-shrink:1;
+
+    }
+    ul{
+      list-style: none;
+      padding: 0;
+    }
+
+    button {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      touch-action: manipulation;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      border-radius: 4px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      color: #616161;
+      background-color: #f5f5f5;
+      border-color: #dcdcdc;
+    }
+
+    button.add {
+      border-color: #36964d;
+      background-color: #43bc60;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="gfather">
+    <section>
+      <h2>flex-direction属性决定主轴的方向（即项目的排列方向）</h2>
+      <div>
+        <ul>
+          <li><button id="row" onclick="changeCss('flex-direction', 'row', '#directionProp')">默认（row）</button> 主轴为水平方向，起点在左端</li>
+          <li><button id="row-reverse" onclick="changeCss('flex-direction', 'row-reverse', '#directionProp')">row-reverse</button> 主轴为水平方向，起点在右端</li>
+          <li><button id="column" onclick="changeCss('flex-direction', 'column', '#directionProp')">column</button> 主轴为垂直方向，起点在上沿</li>
+          <li><button id="column-reverse" onclick="changeCss('flex-direction', 'column-reverse', '#directionProp')">column-reverse</button> 主轴为垂直方向，起点在下沿</li>
+        </ul>   
+      </div>
+      <p>.parent的属性flex-direction:
+        <span id="directionProp" style="color: blue">默认（nowrap）</span>
+      </p>
+    </section>
+
+    <section>
+      <h2>flex-wrap属性定义，如果一条轴线排不下，如何换行</h2>
+      <div>
+        <ul>
+          <li><button id="nowrap" onclick="changeCss('flex-wrap', 'nowrap', '#warpProp')">默认（nowrap）</button> 不换行</li>
+          <li><button id="wrap" onclick="changeCss('flex-wrap','wrap', '#warpProp')">wrap</button> 换行，第一行在上方</li>
+          <li><button id="wrap-reverse" onclick="changeCss('flex-wrap', 'wrap-reverse', '#warpProp')">wrap-reverse</button> 换行，第一行在下方</li>
+        </ul>
+      </div>
+      <p>.parent的属性flex-wrap:
+        <span id="warpProp" style="color: blue">nowrap</span>(缩小屏幕，添加更多的子元素查看)</p>
+    </section>
+
+    <section>
+      <h2>justify-content属性定义了项目在主轴上的对齐方式(与轴的方向有关)</h2>
+      <div>
+        <ul>
+          <li><button onclick="changeCss('justify-content', 'flex-start', '#justifyProp')">默认（flex-start）</button> 左对齐</li>
+          <li><button onclick="changeCss('justify-content','flex-end', '#justifyProp')">flex-end</button> 右对齐</li>
+          <li><button onclick="changeCss('justify-content', 'center', '#justifyProp')">center</button> 居中</li>
+          <li><button onclick="changeCss('justify-content','space-between', '#justifyProp')">space-between</button> 两端对齐，项目之间的间隔都相等</li>
+          <li><button onclick="changeCss('justify-content', 'space-around', '#justifyProp')">space-around</button> 每个项目两侧的间隔相等</li>
+        </ul>    
+      </div>
+      <p>.parent的属性justify-content:
+        <span id="justifyProp" style="color: blue">flex-start</span>(放大屏幕，用更少的子元素查看)</p>
+    </section>
+    <section>
+      <h2>align-items属性定义项目在交叉轴上如何对齐</h2>
+      <div>
+        <ul>
+          <li><button onclick="changeCss('align-items', 'flex-start', '#alignItemsProp')">flex-start </button> 交叉轴的起点对齐</li>
+          <li><button onclick="changeCss('align-items','flex-end', '#alignItemsProp')">flex-end</button> 交叉轴的终点对齐</li>
+          <li><button onclick="changeCss('align-items', 'center', '#alignItemsProp')">center</button> 交叉轴的中点对齐</li>
+          <li><button onclick="changeCss('align-items','baseline ', '#alignItemsProp')">baseline </button> 项目的第一行文字的基线对齐</li>
+          <li><button onclick="changeCss('align-items', 'stretch', '#alignItemsProp')">默认(stretch)</button> 如果项目未设置高度或设为auto，将占满整个容器的高度</li>
+        </ul>   
+      </div>
+      <p>.parent的属性align-items:
+        <span id="alignItemsProp" style="color: blue">stretch</span></p>
+    </section>
+    <section>
+      <h2>align–content按钮查看效果</h2>
+      <div>
+        <ul>
+          <li><button onclick="changeCss('align-content', 'flex-start', '#alignContentProp')">flex-start</button> 与交叉轴的起点对齐</li>
+          <li><button onclick="changeCss('align-content','flex-end', '#alignContentProp')">flex-end</button> 与交叉轴的终点对齐</li>
+          <li><button onclick="changeCss('align-content', 'center', '#alignContentProp')">center</button> 与交叉轴的中点对齐</li>
+          <li><button onclick="changeCss('align-content','space-between ', '#alignContentProp')">space-between</button> 与交叉轴两端对齐，轴线之间的间隔平均分布</li>
+          <li><button onclick="changeCss('align-content','space-around ', '#alignContentProp')">space-around</button> 每根轴线两侧的间隔都相等</li>
+          <li><button onclick="changeCss('align-content', 'stretch', '#alignContentProp')">默认(stretch)</button> 轴线占满整个交叉轴</li>
+        </ul>
+      </div>
+      <p>.parent的属性align–content:
+        <span id="alignContentProp" style="color: blue">stretch</span>(缩小屏幕，添加更多的子元素查看)</p>
+    </section>
+    <section>
+      <h2>项目的属性</h2>
+      <div>
+        <ul>
+          <li>
+            <button title="order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。" onclick="changeChildCss('order', '2')">order</button> 定义项目的排列顺序</li>
+          </li>
+          <li>
+            <button title="如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍" onclick="changeChildCss('flex-grow', '1')">flex-grow</button> 定义项目的放大比例</li>
+          </li>
+          <li>
+            <button title="如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小" onclick="changeChildCss('flex-shrink', '4')">flex-shrink</button> 定义了项目的缩小比例</li>
+          </li>
+          <li>
+            <button title="flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小" onclick="changeChildCss('flex-basis', 'auto')">flex-basis</button> 定义了在分配多余空间之前，项目占据的主轴空间</li>
+          </li>
+          <li>
+            <button title="该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)" onclick="changeChildCss('flex', 'none')">flex </button> flex属性是flex-grow, flex-shrink 和 flex-basis的简写</li>
+          </li>
+          <li>
+            <button title="align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。" onclick="changeChildCss('align-self', 'flex-end')">align-self </button> align-self属性允许单个项目有与其他项目不一样的对齐方式</li>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section style="display: flex;align-items: center;">
+      <div>
+        <button class="add" id="adChild">增加子元素</button><br/>
+        <button id="rmChild">删除子元素</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="parent">
+    <!-- flex container -->
+    <div class="child" id="child">特殊的项目</div>
+    <div class="child" style="padding-top:10px">子元素1</div>
+    <!-- flex item -->
+    <div class="child" style="padding-top:20px">子元素2</div>
+    <!-- flex item -->
+    <div class="child" style="padding-top:30px">子元素3</div>
+    <!-- flex item -->
+  </div>
+</body>
+<script type="text/javascript">
+  function $(id) {
+    return document.querySelector(id);
+  }
+  var parent = $('.parent');
+  var child = $('#child');
+
+  function changeCss(prop, value, obj) {
+    parent.style[prop] = value;
+    $(obj).innerHTML = value;
+  };
+
+  function changeChildCss(prop, value) {
+    child.style[prop] = value;
+  };
+
+  $('#adChild').onclick = function () {
+    var _len = parent.children.length;
+    var _child = parent.children[_len-1].cloneNode();
+    _child.innerHTML = '子元素' + (_len + 1);
+    parent.appendChild(_child);
+  }
+
+  $('#rmChild').onclick = function () {
+    var _len = parent.children.length;
+    if (_len > 3) {
+      parent.removeChild(parent.children[_len - 1]);
+    } else {
+      alert('再删除你什么也看不到啦- -!')
+    }
+
+  }
+</script>
+
+</html>
